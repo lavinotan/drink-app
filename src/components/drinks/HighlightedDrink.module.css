@@ -1,0 +1,71 @@
+.image {
+  display: block;
+  max-width: 300px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.highlightContainer {
+  margin-left: 12%;
+  margin-right: 12%;
+}
+
+.btnContainter {
+  padding: 0.25rem !important;
+  flex: 0 0 auto;
+  width: 8.33333333%;
+
+  text-align: center;
+}
+
+.likeBtn {
+  color: gray;
+  font-size: 1em;
+  font-family: "Heebo", sans-serif;
+  background-color: transparent;
+  border: 0.05em solid;
+  border-radius: 1em;
+  line-height: 1.2em;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out,
+    transform 150ms ease-in-out;
+  outline: 0;
+  margin-top: 1em;
+}
+
+.likeBtn:hover {
+  color: rgb(70, 70, 70);
+}
+
+.likeBtn:active {
+  transform: scale(0.95);
+}
+
+.likeBtn.selected {
+  background-color: red;
+  border-color: red;
+  color: red;
+  font-size: 1em;
+  font-family: "Heebo", sans-serif;
+  background-color: transparent;
+  border: 0.05em solid;
+  border-radius: 1em;
+  line-height: 1.2em;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out,
+    transform 150ms ease-in-out;
+  outline: 0;
+  margin-top: 1em;
+}
+
+.heart_icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: auto;
+  margin-left: auto;
+}
