@@ -63,3 +63,19 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+.removeBtn {
+  color: rgb(204, 204, 204);
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  color: rgb(119, 119, 119);
+  cursor: pointer;
+}
+
+.removeBtn:active {
+  color: rgb(119, 119, 119);
+  cursor: pointer;
+  transform: scale(0.95);
+}

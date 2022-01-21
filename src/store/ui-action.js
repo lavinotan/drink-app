@@ -28,7 +28,14 @@ export const loginToApp = (loginData) => {
     try {
       const data = await sendRequest();
 
-      dispatch(uiActions.login(data.idToken));
+      //console.log(data);
+
+      const userData = {
+        idToken: data.idToken,
+        localId: data.localId,
+      };
+
+      dispatch(uiActions.login(userData));
     } catch (error) {
       alert(error);
       dispatch(

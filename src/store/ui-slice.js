@@ -5,10 +5,16 @@ const retrieveStoredToken = () => {
   return storedToken;
 };
 
+const retrieveLocalId = () => {
+  const storedLocalId = localStorage.getItem("localId");
+  return storedLocalId;
+};
+
 const uiSlice = createSlice({
   name: "ui",
   initialState: {
     token: retrieveStoredToken() ? retrieveStoredToken() : null,
+    localId: retrieveLocalId() ? retrieveLocalId() : null,
     isLoggedIn: localStorage.getItem("token") ? true : false,
     dataStatus: {
       status: "pending",
@@ -18,9 +24,12 @@ const uiSlice = createSlice({
   },
   reducers: {
     login(state, action) {
-      state.token = action.payload;
+      state.token = action.payload.idToken;
+      state.localId = action.payload.localId;
       state.isLoggedIn = true;
-      localStorage.setItem("token", action.payload);
+
+      localStorage.setItem("token", action.payload.idToken);
+      localStorage.setItem("localId", action.payload.localId);
     },
     logout(state) {
       state.token = null;

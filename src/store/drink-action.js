@@ -121,6 +121,51 @@ export const sendDrinkData = (drinkData) => {
   };
 };
 
+export const removeDrinkData = (id) => {
+  return async (dispatch) => {
+    dispatch(
+      uiActions.showDataStatus({
+        status: "pending",
+        title: "Removing data",
+        message: "Removing drink item.",
+      })
+    );
+
+    const sendRequest = async () => {
+      const response = await fetch(`${FIREBASE_DOMAIN}/drinks/${id}.json`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Removing drink data failed!");
+      }
+    };
+
+    try {
+      await sendRequest();
+
+      dispatch(
+        uiActions.showDataStatus({
+          status: "success",
+          title: "Success!",
+          message: "Remove drink data successfully!",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showDataStatus({
+          status: "error",
+          title: "Error!",
+          message: error.message,
+        })
+      );
+    }
+  };
+};
+
 export const updateDrinkData = (drinkData) => {
   return async (dispatch) => {
     //console.log(drinkData);

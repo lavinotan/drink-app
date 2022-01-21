@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import classes from "./DrinkItem.module.css";
 import { drinkActions } from "../../store/drink-slice";
-import { updateDrinkData } from "../../store/drink-action";
+import { updateDrinkData, removeDrinkData } from "../../store/drink-action";
 
 const DrinkItem = (props) => {
   const match = useRouteMatch();
@@ -14,13 +14,22 @@ const DrinkItem = (props) => {
     dispatch(updateDrinkData(updatedDrinkFavData));
   };
 
+  const removeDrinkItem = () => {
+    dispatch(removeDrinkData(props.id));
+  };
+
   const favBtnClass = props.isFavorite
     ? `${classes.likeBtn} ${classes.selected}`
     : classes.likeBtn;
 
   return (
-    <div className="col-md-12">
-      <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    <div className="row">
+      <div className="col-auto">
+        <div className={classes.removeBtn} onClick={removeDrinkItem}>
+          <i className="fa fa-minus-circle"></i>
+        </div>
+      </div>
+      <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative col-11">
         <div className="col-4 d-lg-block">
           <img className={classes.image} src={props.image} alt={props.name} />
         </div>
