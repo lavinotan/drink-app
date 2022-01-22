@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 
 const Footer = (props) => {
   return (
@@ -16,6 +16,7 @@ const Footer = (props) => {
               className="text-muted"
               href="https://github.com/lavinotan"
               target="_blank"
+              rel="noreferrer"
             >
               <svg className="bi" width="24" height="24">
                 <use xlinkHref="#github" />
@@ -27,6 +28,7 @@ const Footer = (props) => {
               className="text-muted"
               href="https://www.linkedin.com/in/lavinoweichungchen/"
               target="_blank"
+              rel="noreferrer"
             >
               <svg className="bi" width="24" height="24">
                 <use xlinkHref="#linkedin" />
@@ -38,6 +40,7 @@ const Footer = (props) => {
               className="text-muted"
               href="https://www.facebook.com/lavinotw"
               target="_blank"
+              rel="noreferrer"
             >
               <svg className="bi" width="24" height="24">
                 <use xlinkHref="#facebook" />

@@ -7,7 +7,7 @@ import classes from "./AuthForm.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 //import { uiActions } from "../../store/ui-slice";
-import { loginToApp } from "../../store/ui-action";
+import { loginToApp, loginWithGoogle } from "../../store/ui-action";
 
 const signInURL =
   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCXkXwXbt9Tp23b1jdBpbevKw0jRoyhTdw";
@@ -58,6 +58,11 @@ const AuthForm = (props) => {
     history.replace("/");
   };
 
+  const loginWithGoogleHandler = () => {
+    //console.log("LoginWithGoogleHandler");
+    dispatch(loginWithGoogle());
+  };
+
   return (
     <Fragment>
       <div className="form-signin mb-5">
@@ -105,7 +110,11 @@ const AuthForm = (props) => {
           <hr className="my-5" />
 
           <div className="text-center mt-3">
-            <button className={classes.loginButton}>
+            <button
+              type="button"
+              className={classes.loginButton}
+              onClick={loginWithGoogleHandler}
+            >
               <i className="fab fa-google"></i>Sign in with Google
             </button>
           </div>

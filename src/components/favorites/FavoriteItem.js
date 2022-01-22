@@ -1,11 +1,12 @@
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
+//import { useRouteMatch, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./FavoriteItem.module.css";
 
 const HOME_URLNAME = "drinks";
 
 const FavoriteItem = (props) => {
-  const match = useRouteMatch();
-  const history = useHistory();
+  //const match = useRouteMatch();
+  //const history = useHistory();
 
   //console.log(match);
   //console.log(history);

@@ -4,7 +4,6 @@ import DrinkForm from "../components/drinks/DrinkForm";
 import { sendDrinkData } from "../store/drink-action";
 import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { uiActions } from "../store/ui-slice";
 import { drinkActions } from "../store/drink-slice";
 
 const NewDrink = (props) => {
@@ -19,7 +18,7 @@ const NewDrink = (props) => {
       setIsDrinkAdded(false);
       history.push("/drinks");
     }
-  }, [dataStatus, history]);
+  }, [dataStatus, history, dispatch, isDrinkAdded]);
 
   const addDrinkHandler = (enteredDrinkData) => {
     dispatch(sendDrinkData(enteredDrinkData));

@@ -1,5 +1,44 @@
 import { uiActions } from "./ui-slice";
 
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+const auth = getAuth();
+const googleProvider = new GoogleAuthProvider();
+
+export const loginWithGoogle = () => {
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const result = await signInWithPopup(auth, googleProvider);
+
+      if (!result) {
+        throw new Error("Google authentication failed!");
+      }
+
+      return result;
+    };
+
+    try {
+      const result = await sendRequest();
+
+      const userData = {
+        idToken: result._tokenResponse.idToken,
+        localId: result._tokenResponse.localId,
+      };
+
+      dispatch(uiActions.login(userData));
+    } catch (error) {
+      alert(error);
+      dispatch(
+        uiActions.showDataStatus({
+          status: "error",
+          title: "Error!",
+          message: error.message,
+        })
+      );
+    }
+  };
+};
+
 export const loginToApp = (loginData) => {
   return async (dispatch) => {
     const sendRequest = async () => {
