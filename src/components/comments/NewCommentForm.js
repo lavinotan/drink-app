@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sendCommentData } from "../../store/drink-action";
+import { sendCommentData } from "../../store/comment-action";
 import Card from "../UI/Card";
 
 import "./NewCommentForm.css";
 
 const NewCommentForm = (props) => {
-  const [date, setDate] = useState("");
+  //const [date, setDate] = useState("");
 
   const dispatch = useDispatch();
 
@@ -17,12 +17,12 @@ const NewCommentForm = (props) => {
   const subjectInputRef = useRef();
   const nicknameInputRef = useRef();
 
-  const dataStatus = useSelector((state) => state.ui.dataStatus);
+  const dataStatus = useSelector((state) => state.ui);
 
   const { onAddComment } = props;
 
   useEffect(() => {
-    if (isCommentAdded && dataStatus.status === "success") {
+    if (isCommentAdded && dataStatus.dataStatus.status === "success") {
       onAddComment();
       setIsCommentAdded(false);
     }
@@ -37,7 +37,10 @@ const NewCommentForm = (props) => {
     const enteredComment = commentInputRef.current.value;
     const enteredRating = ratingInput;
     const enteredSubject = subjectInputRef.current.value;
-    const enteredNickname = nicknameInputRef.current.value;
+    const enteredNickname =
+      nicknameInputRef.current.value.length === 0
+        ? dataStatus.userName
+        : nicknameInputRef.current.value;
 
     let today = new Date();
 
@@ -48,7 +51,7 @@ const NewCommentForm = (props) => {
       "/" +
       today.getDate();
 
-    setDate(currentDate);
+    //setDate(currentDate);
 
     console.log(currentDate);
     //console.log(props.drinkId);
@@ -58,7 +61,7 @@ const NewCommentForm = (props) => {
         commentData: {
           commentText: enteredComment,
           rating: enteredRating,
-          commentDate: date,
+          commentDate: currentDate,
           subject: enteredSubject,
           nickname: enteredNickname,
         },
@@ -77,7 +80,6 @@ const NewCommentForm = (props) => {
         onSubmit={submitFormHandler}
         ref={formRef}
         className="needs-validation"
-        noValidate
       >
         <div className="row g-3">
           <div className="col-sm-6 mb-3">
@@ -137,7 +139,13 @@ const NewCommentForm = (props) => {
           <label htmlFor="subject" className="form-label">
             Subject
           </label>
-          <input id="subject" ref={subjectInputRef} className="form-control" />
+          <input
+            id="subject"
+            ref={subjectInputRef}
+            className="form-control"
+            required
+            type="text"
+          />
         </div>
         <div className="col-12">
           <label htmlFor="comment" className="form-label">
@@ -148,6 +156,7 @@ const NewCommentForm = (props) => {
             rows="5"
             ref={commentInputRef}
             className="form-control"
+            required
           ></textarea>
         </div>
 

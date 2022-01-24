@@ -15,15 +15,6 @@ const commentSlice = createSlice({
     replaceComments(state, action) {
       state.comments = action.payload.comments;
     },
-    addDrinkItem(state, action) {
-      const newComment = action.payload;
-
-      state.comments.push({
-        id: newComment.id,
-        rating: newComment.rating,
-        commentText: newComment.commentText,
-      });
-    },
   },
 });
 

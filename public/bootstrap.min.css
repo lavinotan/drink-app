@@ -5209,18 +5209,17 @@ fieldset:disabled .btn {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1055;
-  display: none;
   width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  outline: 0;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.75);
+  
 }
 .modal-dialog {
   position: relative;
   width: auto;
-  margin: 0.5rem;
+  margin: auto;
+  top: 20vh;
   pointer-events: none;
 }
 .modal.fade .modal-dialog {
@@ -5320,7 +5319,8 @@ fieldset:disabled .btn {
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 500px;
-    margin: 1.75rem auto;
+    margin: auto;
+    
   }
   .modal-dialog-scrollable {
     height: calc(100% - 3.5rem);

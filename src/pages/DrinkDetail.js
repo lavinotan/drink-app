@@ -7,6 +7,8 @@ import Comments from "../components/comments/Comments";
 const DrinkDetails = (props) => {
   const match = useRouteMatch();
 
+  //console.log(match);
+
   const params = useParams();
   const { drinkId } = params;
 

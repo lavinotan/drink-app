@@ -1,55 +1,51 @@
-import { drinkActions } from "./drink-slice";
 import { uiActions } from "./ui-slice";
+import { commentActions } from "./commnet-slice";
 
 const FIREBASE_DOMAIN = "https://drinkapp-eb423-default-rtdb.firebaseio.com";
 
-export const fetchDrinkData = () => {
+export const fetchCommentData = (drinkId) => {
   return async (dispatch) => {
     dispatch(
       uiActions.showDataStatus({
         status: "pending",
-        title: "Getting data",
-        message: "Getting drink data.",
+        title: "Sending data",
+        message: "Sending drink data.",
       })
     );
 
     const fetchData = async () => {
-      const response = await fetch(`${FIREBASE_DOMAIN}/drinks.json`);
+      const response = await fetch(
+        `${FIREBASE_DOMAIN}/comments/${drinkId}.json`
+      );
 
       if (!response.ok) {
-        throw new Error("Could not fetch drink data!");
+        throw new Error("Could not fetch comment data!");
       }
-
-      //console.log(response);
 
       const data = await response.json();
 
-      //console.log(data);
-
-      const transformedDrinks = [];
+      const tranformedComments = [];
 
       for (const key in data) {
-        const drinkObj = {
+        const commentObj = {
           id: key,
           ...data[key],
         };
 
-        transformedDrinks.push(drinkObj);
+        tranformedComments.push(commentObj);
       }
 
-      //console.log(transformedDrinks);
+      //console.log(tranformedComments);
 
-      return transformedDrinks;
+      return tranformedComments;
     };
 
     try {
-      let drinkData = await fetchData();
+      let commentData = await fetchData();
 
-      //console.log("fetchData" + drinkData);
-
-      await dispatch(
-        drinkActions.replaceDrinkItems({
-          drinkItems: drinkData || [],
+      dispatch(
+        commentActions.replaceComments({
+          comments: commentData || [],
         })
       );
 
@@ -68,13 +64,11 @@ export const fetchDrinkData = () => {
           message: error.message,
         })
       );
-
-      //console.log(error.message);
     }
   };
 };
 
-export const sendDrinkData = (drinkData) => {
+export const sendCommentData = (requestData) => {
   return async (dispatch) => {
     dispatch(
       uiActions.showDataStatus({
@@ -85,98 +79,11 @@ export const sendDrinkData = (drinkData) => {
     );
 
     const sendRequest = async () => {
-      const response = await fetch(`${FIREBASE_DOMAIN}/drinks.json`, {
-        method: "POST",
-        body: JSON.stringify(drinkData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Sending drink data failed!");
-      }
-    };
-
-    try {
-      await sendRequest();
-
-      dispatch(
-        uiActions.showDataStatus({
-          status: "success",
-          title: "Success!",
-          message: "Sent drink data successfully!",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showDataStatus({
-          status: "error",
-          title: "Error!",
-          message: error.message,
-        })
-      );
-    }
-  };
-};
-
-export const removeDrinkData = (id) => {
-  return async (dispatch) => {
-    dispatch(
-      uiActions.showDataStatus({
-        status: "pending",
-        title: "Removing data",
-        message: "Removing drink item.",
-      })
-    );
-
-    const sendRequest = async () => {
-      const response = await fetch(`${FIREBASE_DOMAIN}/drinks/${id}.json`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Removing drink data failed!");
-      }
-    };
-
-    try {
-      await sendRequest();
-
-      //console.log("removeDrinkData");
-
-      dispatch(
-        uiActions.showDataStatus({
-          status: "success",
-          title: "Success!",
-          message: "Remove drink data successfully!",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showDataStatus({
-          status: "error",
-          title: "Error!",
-          message: error.message,
-        })
-      );
-    }
-  };
-};
-
-export const updateDrinkData = (drinkData) => {
-  return async (dispatch) => {
-    //console.log(drinkData);
-
-    const sendRequest = async () => {
       const response = await fetch(
-        `${FIREBASE_DOMAIN}/drinks/${drinkData.id}.json`,
+        `${FIREBASE_DOMAIN}/comments/${requestData.drinkId}.json`,
         {
-          method: "PATCH",
-          body: JSON.stringify({ isFavorite: drinkData.isFavorite }),
+          method: "POST",
+          body: JSON.stringify(requestData.commentData),
           headers: {
             "Content-Type": "application/json",
           },
@@ -196,6 +103,56 @@ export const updateDrinkData = (drinkData) => {
           status: "success",
           title: "Success!",
           message: "Sent drink data successfully!",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showDataStatus({
+          status: "error",
+          title: "Error!",
+          message: error.message,
+        })
+      );
+    }
+  };
+};
+
+export const removeCommentData = (drinkId) => {
+  return async (dispatch) => {
+    dispatch(
+      uiActions.showDataStatus({
+        status: "pending",
+        title: "Removing data",
+        message: "Removing comment data.",
+      })
+    );
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `${FIREBASE_DOMAIN}/comments/${drinkId}.json`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Removing comment data failed!");
+      }
+    };
+
+    try {
+      await sendRequest();
+
+      //console.log("removeCommentData");
+
+      dispatch(
+        uiActions.showDataStatus({
+          status: "success",
+          title: "Success!",
+          message: "Remove comment data successfully!",
         })
       );
     } catch (error) {

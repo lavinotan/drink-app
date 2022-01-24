@@ -62,31 +62,33 @@ const DrinkForm = (props) => {
         >
           <div className="row g-3">
             <div className="col-sm-6">
-              <label html="name" className="form-label">
+              <label htmlFor="name" className="form-label">
                 Name
               </label>
               <input
                 className="form-control"
                 type="text"
-                required
+                placeholder="e.g. Heineken Larger"
                 id="name"
                 ref={nameInputRef}
+                required
               />
             </div>
             <div className="col-sm-6">
-              <label html="brewer" className="form-label">
+              <label htmlFor="brewer" className="form-label">
                 Brewer
               </label>
               <input
                 className="form-control"
                 type="text"
+                placeholder="e.g. Heineken"
                 required
                 id="brewer"
                 ref={brewerInputRef}
               />
             </div>
             <div className="col-md-5">
-              <label html="type" className="form-label">
+              <label htmlFor="type" className="form-label">
                 Type
               </label>
               <select
@@ -106,7 +108,7 @@ const DrinkForm = (props) => {
               </select>
             </div>
             <div className="col-sm-6">
-              <label html="abv" className="form-label">
+              <label htmlFor="abv" className="form-label">
                 ABV (Alcohol by Volume %)
               </label>
               <input
@@ -120,7 +122,7 @@ const DrinkForm = (props) => {
               />
             </div>
             <div className="col-12">
-              <label className="form-label" html="image">
+              <label className="form-label" htmlFor="image">
                 Image URL
               </label>
               <input
@@ -133,7 +135,7 @@ const DrinkForm = (props) => {
               />
             </div>
             <div className="col-12">
-              <label className="form-label" html="description">
+              <label className="form-label" htmlFor="description">
                 Description
               </label>
               <textarea

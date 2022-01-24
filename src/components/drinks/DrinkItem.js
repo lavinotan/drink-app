@@ -2,11 +2,21 @@ import { useDispatch } from "react-redux";
 import { Link, useRouteMatch } from "react-router-dom";
 import classes from "./DrinkItem.module.css";
 import { drinkActions } from "../../store/drink-slice";
-import { updateDrinkData, removeDrinkData } from "../../store/drink-action";
+import { updateDrinkData } from "../../store/drink-action";
+import { useEffect, useState } from "react";
 
 const DrinkItem = (props) => {
   const match = useRouteMatch();
   const dispatch = useDispatch();
+
+  const [isDrinkDataRemoved, setIsDrinkDataRemoved] = useState(false);
+
+  useEffect(() => {
+    if (isDrinkDataRemoved && props.removeDrinkConfirmed) {
+      props.onRemoveDrink(props.id);
+      setIsDrinkDataRemoved(false);
+    }
+  }, [isDrinkDataRemoved, props]);
 
   const toggleFavHandler = () => {
     dispatch(drinkActions.toggleFav(props.id));
@@ -14,8 +24,10 @@ const DrinkItem = (props) => {
     dispatch(updateDrinkData(updatedDrinkFavData));
   };
 
-  const removeDrinkItem = () => {
-    dispatch(removeDrinkData(props.id));
+  const removeDataHandler = () => {
+    //props.onRemoveDrink(props.id);
+    props.onShowModal();
+    setIsDrinkDataRemoved(true);
   };
 
   const favBtnClass = props.isFavorite
@@ -25,7 +37,7 @@ const DrinkItem = (props) => {
   return (
     <div className="row">
       <div className="col-auto">
-        <div className={classes.removeBtn} onClick={removeDrinkItem}>
+        <div className={classes.removeBtn} onClick={removeDataHandler}>
           <i className="fa fa-minus-circle"></i>
         </div>
       </div>

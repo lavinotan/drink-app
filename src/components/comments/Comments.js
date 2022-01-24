@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CommentList from "./CommentList";
 import NewCommentForm from "./NewCommentForm";
-import { fetchCommentData } from "../../store/drink-action";
+import { fetchCommentData } from "../../store/comment-action";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
@@ -32,7 +32,7 @@ const Comments = (props) => {
 
   const addedCommentHandler = useCallback(() => {
     dispatch(fetchCommentData(drinkId));
-    console.log("addedCommentHandler");
+    //console.log("addedCommentHandler");
   }, [dispatch, drinkId]);
 
   return (

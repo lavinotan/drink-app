@@ -19,6 +19,9 @@ const DrinkList = (props) => {
             description={drink.description}
             type={drink.type}
             isFavorite={drink.isFavorite}
+            onRemoveDrink={props.onRemoveDrink}
+            removeDrinkConfirmed={props.removeDrinkConfirmed}
+            onShowModal={props.onShowModal}
           />
         ))}
       </ul>

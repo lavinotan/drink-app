@@ -20,10 +20,17 @@ export const loginWithGoogle = () => {
     try {
       const result = await sendRequest();
 
+      const email = result._tokenResponse.email;
+      const emailText = email.split("@");
+      const userName = emailText[0];
+
       const userData = {
         idToken: result._tokenResponse.idToken,
         localId: result._tokenResponse.localId,
+        userName: userName,
       };
+
+      //console.log(userName);
 
       dispatch(uiActions.login(userData));
     } catch (error) {
@@ -67,12 +74,19 @@ export const loginToApp = (loginData) => {
     try {
       const data = await sendRequest();
 
+      const email = data.email;
+      const emailText = email.split("@");
+      const userName = emailText[0];
+
       //console.log(data);
 
       const userData = {
         idToken: data.idToken,
         localId: data.localId,
+        userName: userName,
       };
+
+      console.log(userName);
 
       dispatch(uiActions.login(userData));
     } catch (error) {

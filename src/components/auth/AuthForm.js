@@ -2,7 +2,7 @@
 // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY] sign in
 // https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=[API_KEY] get user data
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import classes from "./AuthForm.module.css";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,18 +17,24 @@ const signUpURL =
 const AuthForm = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const dataStatus = useSelector((state) => state.ui.dataStatus);
+  const isLoggedIn = useSelector((state) => state.ui.isLoggedIn);
 
-  const [isLogin, setIsLogin] = useState(true);
-  //const [isLoading, setIsLoading] = useState(false);
+  const [isToLogin, setIsToLogin] = useState(true);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const isLoading = !dataStatus || dataStatus.status === "pending";
+  //const isLoading = !dataStatus || dataStatus.status === "pending";
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      history.replace("/");
+    }
+  }, [isLoggedIn, history]);
+
   const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
+    setIsToLogin((prevState) => !prevState);
   };
 
   const submitHandler = (event) => {
@@ -41,7 +47,7 @@ const AuthForm = (props) => {
 
     let url;
 
-    if (isLogin) {
+    if (isToLogin) {
       url = signInURL;
     } else {
       url = signUpURL;
@@ -54,12 +60,10 @@ const AuthForm = (props) => {
     };
 
     dispatch(loginToApp(loginData));
-
-    history.replace("/");
   };
 
   const loginWithGoogleHandler = () => {
-    //console.log("LoginWithGoogleHandler");
+    console.log("LoginWithGoogleHandler");
     dispatch(loginWithGoogle());
   };
 
@@ -68,7 +72,7 @@ const AuthForm = (props) => {
       <div className="form-signin mb-5">
         <form onSubmit={submitHandler}>
           <h1 className="h3 mb-3 fw-normal text-center">
-            {isLogin ? "Please sign in" : "Sign Up"}
+            {isToLogin ? "Please sign in" : "Sign Up"}
           </h1>
 
           <div className="form-floating">
@@ -96,14 +100,14 @@ const AuthForm = (props) => {
 
           <div className="text-center">
             <button className="w-75 btn btn-lg btn-primary" type="submit">
-              {isLogin ? "Sign in" : "Create Account"}
+              {isToLogin ? "Sign in" : "Create Account"}
             </button>
             <button
               type="button"
               className="form-control-plaintext text-center mt-3"
               onClick={switchAuthModeHandler}
             >
-              {isLogin ? "Create new account" : "Login with existing account"}
+              {isToLogin ? "Create new account" : "Login with existing account"}
             </button>
           </div>
 
