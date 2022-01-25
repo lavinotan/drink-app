@@ -74,6 +74,71 @@ export const fetchDrinkData = () => {
   };
 };
 
+export const fetchDrinkDataById = (drinkId) => {
+  return async (dispatch) => {
+    dispatch(
+      uiActions.showDataStatus({
+        status: "pending",
+        title: "Getting data",
+        message: "Getting drink data.",
+      })
+    );
+
+    const fetchData = async () => {
+      const response = await fetch(`${FIREBASE_DOMAIN}/drinks/${drinkId}.json`);
+
+      if (!response.ok) {
+        throw new Error("Could not fetch drink data!");
+      }
+
+      //console.log(response);
+
+      const data = await response.json();
+
+      const drinkObj = {
+        id: drinkId,
+        name: data.name,
+        image: data.image,
+        description: data.description,
+        type: data.type,
+        brewer: data.brewer,
+        isFavorite: data.isFavorite,
+        abv: data.abv,
+      };
+
+      //console.log(drinkObj);
+
+      return drinkObj;
+    };
+
+    try {
+      let drinkData = await fetchData();
+
+      //console.log(drinkData);
+
+      dispatch(
+        uiActions.showDataStatus({
+          status: "success",
+          title: "Success!",
+          message: "Sent drink data successfully!",
+        })
+      );
+
+      return drinkData;
+    } catch (error) {
+      dispatch(
+        uiActions.showDataStatus({
+          status: "error",
+          title: "Error!",
+          message: error.message,
+        })
+      );
+
+      //console.log(error.message);
+    }
+  };
+};
+
 export const sendDrinkData = (drinkData) => {
   return async (dispatch) => {
     dispatch(

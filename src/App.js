@@ -1,6 +1,6 @@
 import { Route, Redirect, Switch } from "react-router-dom";
 
-import React, { useEffect, Suspense } from "react";
+import React, { Suspense } from "react";
 
 import AllDrinks from "./pages/AllDrinks";
 import Favorites from "./pages/Favorites";
@@ -9,17 +9,12 @@ import NewDrink from "./pages/NewDrink";
 import Layout from "./components/layout/Layout";
 import AuthPage from "./pages/AuthPage";
 
-import { useDispatch, useSelector } from "react-redux";
-import { fetchDrinkData } from "./store/drink-action";
-import { sendDrinkData } from "./store/drink-action";
+import { useSelector } from "react-redux";
 
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import UserProfile from "./components/auth/UserProfile";
 
-let isInitial = true;
-
 function App() {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.ui.isLoggedIn);
 
   //dispatch(sendDrinkData(drink.drinkItems));
