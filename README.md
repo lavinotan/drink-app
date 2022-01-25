@@ -4,7 +4,7 @@ An interactive, multipage web app to record/note favorite drink made by React, R
 
 ## Instructions
 
-Website link: [https://fullstack-todolist.netlify.app/](https://fullstack-todolist.netlify.app/)
+Website link: [https://mydrink.netlify.app](https://mydrink.netlify.app)
 
 - Open the above link on Chrome, FireFox, or Safari.
 
