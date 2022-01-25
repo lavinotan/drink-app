@@ -1,8 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
-
 import { uiActions } from "../../store/ui-slice";
-
-import { Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainHeader = (props) => {

@@ -1,5 +1,5 @@
 import CommentItem from "./CommentItem";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 
 const CommentList = (props) => {
   //console.log(props.comments);

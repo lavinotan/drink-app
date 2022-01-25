@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import HighlightedDrink from "../components/drinks/HighlightedDrink";
 import { Route, useRouteMatch, Link, useParams } from "react-router-dom/";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Comments from "../components/comments/Comments";
 import { fetchDrinkDataById } from "../store/drink-action";
 
