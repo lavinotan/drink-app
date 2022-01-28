@@ -10,7 +10,7 @@ Website link: [https://mydrink.netlify.app](https://mydrink.netlify.app)
 
 ## Demo
 
-![alt text](https://github.com/lavinotan/backend-todolist-by-node-express/blob/9ca3729ee3ccb60fd670bee5c3d436e764b2b688/dynamic-todolist-with-auth.gif "App demo")
+![alt text](https://github.com/lavinotan/drink-app/blob/6d5a6bbfec4f674bb6bc65424e800861ca1df04e/drinkapp.giff "App demo")
 
 ## Requirements & Technologies
 
