@@ -10,7 +10,7 @@ Website link: [https://mydrink.netlify.app](https://mydrink.netlify.app)
 
 ## Demo
 
-![alt text](https://github.com/lavinotan/drink-app/blob/6d5a6bbfec4f674bb6bc65424e800861ca1df04e/drinkapp.giff "App demo")
+![alt text](https://github.com/lavinotan/drink-app/blob/6d5a6bbfec4f674bb6bc65424e800861ca1df04e/drinkapp.gif "App demo")
 
 ## Requirements & Technologies
 
